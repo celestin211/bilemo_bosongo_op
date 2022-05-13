@@ -1,0 +1,14 @@
+App\Entity\Product:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: brand
+    properties:
+        brand:
+            - NotBlank: ~
+            - Length:
+                min: 1
+                max: 30
+        model:
+            - NotBlank: ~
+            - Length:
+                min: 1
+                max: 30

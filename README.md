@@ -20,7 +20,7 @@ Création d'une API Rest pour BileMo, une entreprise de vente de téléphone fic
 * Composer 1.8.0
 * WampServer 3.1.7
 * Apache 2.4.37
-* PHP 8
+* PHP 7.4.26
 * MySQL 5.7.24 (5.7.8 minimum pour l'utilisation du champs JSON !)
 * OpenSSL
 *Postman

@@ -12,6 +12,7 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class DeleteUserController
 {
@@ -65,6 +66,10 @@ class DeleteUserController
 
         if (null == $user) {
             throw new ApiException('This user not exist.', 404);
+        }
+
+        if ($user!= "ROLE_ADMIN") {
+            throw new ApiException('You are not admin,  access denied 🙅 ', 403);
         }
 
 

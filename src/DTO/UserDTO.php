@@ -18,7 +18,7 @@ class UserDTO
   private $password;
   private $email;
   private $_links;
-  private $userClient;
+
 
     public function __construct(
         User $user
@@ -28,7 +28,7 @@ class UserDTO
         $this->password = $user->getPassword();
         $this->email = $user->getEmail();
         $this->roles = $user->getRoles();
-        $this->userClient = $user->getUserClient();
+
     }
 
     public function getUserDTO(array $users)

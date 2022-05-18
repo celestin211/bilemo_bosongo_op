@@ -68,11 +68,6 @@ class DeleteUserController
             throw new ApiException('This user not exist.', 404);
         }
 
-        if ($user!= "ROLE_ADMIN") {
-            throw new ApiException('You are not admin,  access denied 🙅 ', 403);
-        }
-
-
         $this->manager->remove($user);
         $this->manager->flush();
 

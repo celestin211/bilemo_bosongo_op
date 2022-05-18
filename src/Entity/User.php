@@ -43,6 +43,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Person::class, mappedBy="userClient", orphanRemoval=true)
      */
     private $people;
+    private $_links;
 
     public function __construct()
     {
@@ -139,6 +140,18 @@ class User implements UserInterface
         return $this;
     }
 
+    public function get_Links(): ?array
+    {
+        return $this->_links;
+    }
+
+    public function set_Links(array $links): self
+    {
+        $this->_links = $links;
+
+        return $this;
+    }
+
     /**
      * @see UserInterface
      */
@@ -155,5 +168,8 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+
+
 
 }

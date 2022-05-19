@@ -31,7 +31,7 @@ class ListOfPeopleController
     }
 
     /**
-     * @Route("/people", methods={"GET"}, name="listOfPeople")
+     * @Route("/person", methods={"GET"}, name="listOfPeople")
      *
      * @SWG\Response(
      *     response=200,

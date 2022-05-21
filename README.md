@@ -57,4 +57,16 @@ $ openssl genrsa -out config/jwt/private.pem -aes256 4096
 $ openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
 ```
 
+
+# Utilisation
+login méthode = {POST} 
+{
+  "email": "toto@yahoo.fr",
+  "username": "toto",
+  "password": "toto"
+}
+
+#########################
 7. Félicitations le projet est installé correctement, vous pouvez désormais commencer à l'utiliser à votre guise !
+#########################
+                                                                BILEMO

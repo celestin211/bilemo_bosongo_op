@@ -58,15 +58,16 @@ $ openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
 ```
 
 
-# Utilisation
+## Utilisation
+*
 login méthode = {POST} 
 {
   "email": "toto@yahoo.fr",
   "username": "toto",
   "password": "toto"
 }
+*
 
-#########################
 7. Félicitations le projet est installé correctement, vous pouvez désormais commencer à l'utiliser à votre guise !
-#########################
+
                                                                 BILEMO

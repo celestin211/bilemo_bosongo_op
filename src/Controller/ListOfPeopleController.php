@@ -57,8 +57,11 @@ class ListOfPeopleController
     public function listOfpeople(Request $request)
     {
         $people = $this->paging->getDatas($request->query->get('page', 'p'));
+        
         $peopleDTO = $this->personDTO->getPeopleDTO($people);
+        
         $this->links->addLinks($peopleDTO);
+        
         return $this->responder->send($request, $peopleDTO);
     }
 }

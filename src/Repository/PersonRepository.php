@@ -19,18 +19,20 @@ class PersonRepository extends ServiceEntityRepository
         parent::__construct($registry, Person::class);
     }
 
-    /**
-      * @return Person[] Returns an array of Person objects
-     */
+    // /**
+    //  * @return Person[] Returns an array of Person objects
+    //  */
 
-    public function findAllByUserClient()
+    public function findByUserClient()
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.userClient > :now')
-            ->orderBy('p.userClient', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+      $query = $this->createQueryBuilder('p')
+      ->select('p')
+      ->from('Person', 'p')
+      ->where('p.user_cleint_id = ?1')
+      ->orderBy('p.user_cleint_id', 'ASC');
+
+      return $query->getResult();
     }
+
 }
+

@@ -25,14 +25,12 @@ class PersonRepository extends ServiceEntityRepository
 
     public function findByUserClient()
     {
-      $query = $this->createQueryBuilder('p')
+      return $this->createQueryBuilder('p')
       ->select('p')
       ->from('Person', 'p')
-      ->where('p.user_cleint_id = ?')
+      ->where('p.user_cleint_id = ? ')
       ->orderBy('p.user_cleint_id', 'ASC');
-
-      return $query->getResult();
+      ->getQuery()
+      ->getResult()
     }
-
 }
-

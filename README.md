@@ -70,4 +70,4 @@ login méthode = {POST}
 
 7. Félicitations le projet est installé correctement, vous pouvez désormais commencer à l'utiliser à votre guise !
 
-                                                                BILEMO
+                                                            CELESTIN BOSONGO

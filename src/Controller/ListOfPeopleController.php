@@ -6,6 +6,7 @@ use App\DTO\PersonDTO;
 use App\Links\LinksPersonDTOGenerator;
 use App\Paging\PeoplePaging;
 use App\Responder\JsonResponder;
+use App\Entity\User;
 use Nelmio\ApiDocBundle\Annotation\Security as SecurityDoc;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,7 @@ class ListOfPeopleController
     private $paging;
     private $personDTO;
     private $links;
+    private $personVoter;
 
     public function __construct(
         JsonResponder $responder,
@@ -28,6 +30,7 @@ class ListOfPeopleController
         $this->paging = $paging;
         $this->personDTO = $personDTO;
         $this->links = $links;
+        $this->personVoter = $personVoter;
     }
 
     /**
@@ -53,12 +56,9 @@ class ListOfPeopleController
      */
     public function listOfpeople(Request $request)
     {
-        $people = $this->paging->getDatas($request->query->get('page'));
-
+        $people = $this->paging->getDatas($request->query->get('page', 'p'));
         $peopleDTO = $this->personDTO->getPeopleDTO($people);
-
         $this->links->addLinks($peopleDTO);
-
         return $this->responder->send($request, $peopleDTO);
     }
 }

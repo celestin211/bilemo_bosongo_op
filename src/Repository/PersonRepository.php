@@ -28,7 +28,7 @@ class PersonRepository extends ServiceEntityRepository
       $query = $this->createQueryBuilder('p')
       ->select('p')
       ->from('Person', 'p')
-      ->where('p.user_cleint_id = ?1')
+      ->where('p.user_cleint_id = ?')
       ->orderBy('p.user_cleint_id', 'ASC');
 
       return $query->getResult();

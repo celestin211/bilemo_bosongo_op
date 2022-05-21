@@ -5,11 +5,12 @@ namespace App\Paging;
 use App\Exceptions\ApiException;
 use App\Repository\PersonRepository;
 use App\Entity\User;
+use App\Entity\Person;
 use Symfony\Component\Security\Core\Security;
 
 class PeoplePaging
 {
-    private const NB_PEOPLE_PAGED = 5;
+    private const NB_PEOPLE_PAGED = 10;
     private $personRepository;
     private $security;
     private $nbPeople;
@@ -24,10 +25,13 @@ class PeoplePaging
         $this->maxPages = intval(ceil($this->nbPeople / self::NB_PEOPLE_PAGED));
     }
 
+
+
     public function getDatas($page)
     {
         if (null === $page) {
-            return $people = $this->personRepository->findAll();
+            return $people = $this->personRepository->findAllByUserClient();
+
         }
 
         if (1 > $page || $page > $this->maxPages) {

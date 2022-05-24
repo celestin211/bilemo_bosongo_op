@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Person;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @method Person|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,20 +18,5 @@ class PersonRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Person::class);
     }
-
-     /**
-      * @return Person[] Returns an array of Person objects
-    */
-
-    public function findByUserClient()
-   {
-       return $this->createQueryBuilder('p')
-           ->andWhere('p.user_client_id')
-           ->orderBy('p.user_client_id', 'ASC')
-           ->setMaxResults(10)
-           ->getQuery()
-           ->getResult()
-       ;
-   }
 
 }

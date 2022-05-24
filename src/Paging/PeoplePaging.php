@@ -4,34 +4,32 @@ namespace App\Paging;
 
 use App\Exceptions\ApiException;
 use App\Repository\PersonRepository;
-use App\Entity\User;
-use App\Entity\Person;
 use Symfony\Component\Security\Core\Security;
 
 class PeoplePaging
 {
-    private const NB_PEOPLE_PAGED = 10;
-    private $personRepository;
+    private const NB_PEOPLE_PAGED = 4;
+    private $repository;
     private $security;
     private $nbPeople;
     private $maxPages;
+    private $idUserClient;
 
     public function __construct(
-      PersonRepository $personRepository
-
+        PersonRepository $repository,
+        Security $security
     ) {
-        $this->personRepository = $personRepository;
-        $this->nbPeople = $this->personRepository->count([]);
+        $this->repository = $repository;
+        $this->security = $security;
+        $this->idUserClient = $this->security->getUser()->getId();
+        $this->nbPeople = $this->repository->count(['userClient' => $this->idUserClient]);
         $this->maxPages = intval(ceil($this->nbPeople / self::NB_PEOPLE_PAGED));
     }
-
-
 
     public function getDatas($page)
     {
         if (null === $page) {
-            return $people = $this->personRepository->findAllByUserClient();
-
+            return $people = $this->repository->findBy(['userClient' => $this->idUserClient], ['email' => 'ASC']);
         }
 
         if (1 > $page || $page > $this->maxPages) {
@@ -40,6 +38,6 @@ class PeoplePaging
 
         $offset = self::NB_PEOPLE_PAGED * ($page - 1);
 
-        return $people = $this->personRepository->findBy([], [], self::NB_PEOPLE_PAGED, $offset);
+        return $people = $this->repository->findBy(['userClient' => $this->idUserClient], ['email' => 'ASC'], self::NB_PEOPLE_PAGED, $offset);
     }
 }

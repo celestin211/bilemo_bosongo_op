@@ -49,7 +49,7 @@ class AddUSerController
     }
 
     /**
-     * @Route("/user", methods={"POST"}, name="addUser")
+     * @Route("/users", methods={"POST"}, name="addUser")
      * * @SWG\Response(
      *     response=201,
      *     description="Returns the created user",

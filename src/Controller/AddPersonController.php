@@ -46,7 +46,7 @@ class AddPersonController
 
 
     /**
-     * @Route("/person", methods={"POST"}, name="addPerson")
+     * @Route("/persons", methods={"POST"}, name="addPerson")
      * * @SWG\Response(
      *     response=201,
      *     description="Returns the created person",

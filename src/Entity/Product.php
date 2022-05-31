@@ -3,7 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use Swagger\Annotations as SWG;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
@@ -15,53 +16,87 @@ class Product
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le brand  est obligatoire !")
+     * @Assert\Length(min=2, max=255, minMessage="Le brand  doit avoir plus de 4 caractères !")
+     * @SWG\Property(type="string")
+     * @var string
      */
     private $brand;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le model  est obligatoire !")
+     * @Assert\Length(min=2, max=255, minMessage="Le model  doit avoir plus de 4 caractères !")
+     * @SWG\Property(type="string")
+     * @var string
      */
     private $model;
 
-    /**
+   /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="L'année est obligatoire !")
+     * @SWG\Property(type="integer")
+     * @var integer
      */
     private $releaseYear;
 
-    /**
+     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="La couleur  est obligatoire !")
+     * @Assert\Length(min=2, max=255, minMessage="Le couleur  doit avoir plus de 4 caractères !")
+     * @SWG\Property(type="string")
+     * @var string
      */
     private $color;
 
-    /**
+      /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="Le pixel  est obligatoire !")
+     * @SWG\Property(type="float")
+     * @var float
      */
     private $screenSize;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Le pixel  est obligatoire !")
+     * @SWG\Property(type="integer")
+     * @var integer
      */
     private $storageGB;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Le giga  est obligatoire !")
+     * @SWG\Property(type="integer")
+     * @var integer
      */
     private $memoryGB;
 
-    /**
+   /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Le mega giga  est obligatoire !")
+     * @SWG\Property(type="integer")
+     * @var integer
      */
     private $megapixels;
 
-    /**
+   /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="Le prix  est obligatoire !")
+     * @SWG\Property(type="float")
+     * @var float
      */
     private $price;
 
     private $_links;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="products")
+     */
+    private $userClient;
 
     public function getId(): ?int
     {
@@ -184,6 +219,18 @@ class Product
     public function set_Links(array $links): self
     {
         $this->_links = $links;
+
+        return $this;
+    }
+
+    public function getUserClient(): ?User
+    {
+        return $this->userClient;
+    }
+
+    public function setUserClient(?User $userClient): self
+    {
+        $this->userClient = $userClient;
 
         return $this;
     }

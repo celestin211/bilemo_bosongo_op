@@ -36,7 +36,7 @@ class DeleteProductController
     }
 
     /**
-     * @Route("/product/{id}", methods={"DELETE"}, name="deleteProduct")
+     * @Route("/products/{id}", methods={"DELETE"}, name="deleteProduct")
      * @SWG\Response(
      *     response=204,
      *     description="product was deleted ",

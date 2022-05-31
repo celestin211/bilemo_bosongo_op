@@ -46,7 +46,7 @@ class AddProductController
     }
 
     /**
-     * @Route("/product", methods={"POST"}, name="addProduct")
+     * @Route("/products", methods={"POST"}, name="addProduct")
      * * @SWG\Response(
      *     response=201,
      *     description="Returns the created person",

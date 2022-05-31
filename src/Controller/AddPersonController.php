@@ -65,7 +65,7 @@ class AddPersonController
      *         @SWG\Property(property="lastname", type="string", example="Smith")
      *     )
      * )
-     * @SWG\Tag(name="People")
+     * @SWG\Tag(name="Person")
      * @SecurityDoc(name="Bearer")
      */
     public function addPerson(Request $request)

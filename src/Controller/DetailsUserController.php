@@ -27,7 +27,7 @@ class DetailsUserController
     }
 
     /**
-     * @Route("/user/{id}", methods={"GET"}, name="detailsUser")
+     * @Route("/users/{id}", methods={"GET"}, name="detailsUser")
      *
      * @SWG\Response(
      *     response=200,

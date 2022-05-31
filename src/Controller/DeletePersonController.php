@@ -36,7 +36,7 @@ class DeletePersonController
     }
 
     /**
-     * @Route("/person/{id}", methods={"DELETE"}, name="deletePerson")
+     * @Route("/persons/{id}", methods={"DELETE"}, name="deletePerson")
      * @SWG\Response(
      *     response=204,
      *     description="Return empty body",

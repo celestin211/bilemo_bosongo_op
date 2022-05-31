@@ -1,18 +1,17 @@
 <?php
 
 namespace App\Entity;
-
-use App\Repository\PersonRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
-
+use Swagger\Annotations as SWG;
 /**
- * @ORM\Entity(repositoryClass=PersonRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\PersonRepository")
  */
 class Person
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -22,22 +21,29 @@ class Person
      */
     private $email;
 
-    /**
+     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="L'adresse email ne doit pas être vide !")
+     * @SWG\Property(type="string")
+     * @var string
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le firstname ne doit pas être vide !")
+     * @SWG\Property(type="string")
+     * @var string
      */
     private $lastname;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="people")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="people")
      */
     private $userClient;
+
     private $_links;
+
     public function getId(): ?int
     {
         return $this->id;

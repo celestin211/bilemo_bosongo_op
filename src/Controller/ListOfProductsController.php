@@ -31,7 +31,7 @@ class ListOfProductsController
     }
 
     /**
-     * @Route("/product", methods={"GET"}, name="listOfProducts")
+     * @Route("/products", methods={"GET"}, name="listOfProducts")
      *
      * @SWG\Response(
      *     response=200,

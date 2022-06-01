@@ -26,7 +26,7 @@ Création d'une API Rest pour BileMo, une entreprise de vente de téléphone fic
 *Postman
 
 ## Informations sur l'API
-* L'obtention du token afin de s'authentifier à l'API se fait via l'envoie des identifiants sur l'URI https://celestinbosongo.com/login
+* L'obtention du token afin de s'authentifier à l'API se fait via l'envoie des identifiants sur l'URI doc/login
 * Les opérations "GET" sont accéssibles à tout utilisateur authentifié.
 * Par sécurité, les autres opérations (POST/PUT/DELETE) ne sont accéssibles qu'aux utilisateurs qui possédent le rôle ROLE_ADMIN.
 

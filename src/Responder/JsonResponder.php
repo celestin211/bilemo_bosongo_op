@@ -8,12 +8,13 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class JsonResponder
 {
-    private $serializer;
 
-    public function __construct(
-        SerializerInterface $serializer
-    ) {
-        $this->serializer = $serializer;
+    public function __construct
+    (
+       private readonly  SerializerInterface $serializer
+    )
+    {
+
     }
 
     public function send(Request $request, $datas, int $status = 200, array $headers = [])

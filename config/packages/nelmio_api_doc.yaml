@@ -1,9 +1,9 @@
 nelmio_api_doc:
     documentation:
         info:
-            title: BileMo CELESTIN BOSONGO
-            description: Projet n°7 OpenClassRooms
-            version: 1.1
+            title: JC PLATON COUTURE
+            description: EcommRce
+            version: 1
         securityDefinitions:
             Bearer:
                 type: apiKey

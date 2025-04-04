@@ -70,7 +70,7 @@ class AddPersonController
      */
     public function addPerson(Request $request)
     {
-        $person = $this->serializer->deserialize($request->getContent(), Person::class, 'json');
+        $person = $this->serializer->deserialize($request->getContent(), Person::class,'json');
         $person->setUserClient($this->security->getUser());
 
         $errors = $this->validator->validate($person);
@@ -80,7 +80,7 @@ class AddPersonController
 
         $this->manager->persist($person);
         $this->manager->flush();
-
+        $person = new  Person();
         $personDTO = new PersonDTO($person);
         $this->links->addLinks($personDTO);
 

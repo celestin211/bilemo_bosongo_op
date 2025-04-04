@@ -8,12 +8,14 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class ExceptionListener
 {
-    private $serializer;
 
-    public function __construct(
-        SerializerInterface $serializer
-    ) {
-        $this->serializer = $serializer;
+    public function __construct
+    (
+        private readonly  SerializerInterface $serializer
+    )
+
+    {
+
     }
 
     public function onKernelException(ExceptionEvent $event)

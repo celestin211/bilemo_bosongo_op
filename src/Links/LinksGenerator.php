@@ -6,12 +6,14 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class LinksGenerator
 {
-    protected $urlGenerator;
 
-    public function __construct(
-        UrlGeneratorInterface $urlGenerator
-    ) {
-        $this->urlGenerator = $urlGenerator;
+
+    public function __construct
+    (
+        protected readonly  UrlGeneratorInterface $urlGenerator
+    )
+    {
+
     }
 
     public function addLinks($datas)

@@ -22,7 +22,7 @@ class ProductVoter extends Voter
         $user = $token->getUser();
 
         // if the user is anonymous, do not grant access
-        if (!$user instanceof UserInterface) {
+        if (!$user instanceof User) {
             return false;
         }
 
@@ -30,14 +30,14 @@ class ProductVoter extends Voter
         switch ($attribute) {
             case 'view':
                 // logic to determine if the user can VIEW
-                return $this->canView($subject, $product);
+                return $this->canView($subject, $user);
                 break;
             case 'delete':
-                return $this->canDelete($subject, $product);
+                return $this->canDelete($subject, $user);
                 break;
 
             case 'add':
-                return $this->canAdd($subject, $product);
+                return $this->canAdd($subject, $user);
                 break;
         }
 
@@ -46,7 +46,7 @@ class ProductVoter extends Voter
 
     private function canView(Product $subject, User $user)
     {
-        return $user->getId() === $subject->getProduit()->getId();
+        return $user->getId() === $subject->getId();
     }
 
     private function canDelete(Product $subject, User $user)

@@ -16,14 +16,14 @@ supprimer un utilisateur ajouté par un client.
 Création d'une API Rest pour BileMo, une entreprise de vente de téléphone fictive.
 
 ## Environnement utilisé durant le développement
-* Symfony 4.2
+* Symfony 6.4
 * Composer 1.8.0
 * WampServer 3.1.7
 * Apache 2.4.37
-* PHP 7.4.26
+* PHP 8.2.0
 * MySQL 5.7.24 (5.7.8 minimum pour l'utilisation du champs JSON !)
 * OpenSSL
-*Postman
+* Postman
 
 ## Informations sur l'API
 * L'obtention du token afin de s'authentifier à l'API se fait via l'envoie des identifiants sur l'URI doc/login
@@ -53,7 +53,7 @@ Création d'une API Rest pour BileMo, une entreprise de vente de téléphone fic
 Et noter votre passphrase à la ligne "JWT_PASSPHRASE=" de votre fichier `.env.local`
 ```bash
 $ mkdir config/jwt
-$ openssl genrsa -out config/jwt/private.pem -aes256 4096
+$ openssl genrsa -out config/jwt/private.pem 
 $ openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
 ```
 
@@ -70,4 +70,4 @@ login méthode = {POST}
 
 7. Félicitations le projet est installé correctement, vous pouvez désormais commencer à l'utiliser à votre guise !
 
-                                                           https://celestinbosongo.com/doc
+https://celestinbosongo.com/doc

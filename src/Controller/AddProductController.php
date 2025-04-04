@@ -16,6 +16,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use ApiPlatform\Metadata\ApiResource;
 
 class AddProductController
 {
@@ -86,6 +87,7 @@ class AddProductController
 
         $this->manager->persist($product);
         $this->manager->flush();
+        $product = new  Product();
         $productDTO = new ProductDTO($product);
         $this->links->addLinks($productDTO);
 

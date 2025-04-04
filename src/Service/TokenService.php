@@ -16,11 +16,10 @@ class TokenService
      *
      * @var [type]
      */
-    protected $jwt;
 
-    public function __construct(JWTEncoderInterface $jwt)
+    public function __construct(readonly protected  JWTEncoderInterface $jwt)
     {
-        $this->jwt = $jwt;
+
     }
 
     /**

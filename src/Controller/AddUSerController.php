@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 class AddUSerController
@@ -33,7 +32,6 @@ class AddUSerController
         SerializerInterface $serializer,
         EntityManagerInterface $manager,
         Security $security,
-        UserPasswordEncoderInterface $encoder,
         ValidatorInterface $validator,
         ErrorsValidator $errorsValidator,
         JsonResponder $responder,

@@ -10,34 +10,31 @@ use App\Entity\Person;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * [ORM\Entity(repositoryClass="App\Repository\UserRepository")]
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements UserInterface
 {
     /**
-     * [ORM\Id()]
-     * [ORM\GeneratedValue()]
-     * [ORM\Column(type="integer")]
-     * [SWG\Property(type="integer", description="Identifiant unique de l'utilisateur")]
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     * @SWG\Property(type="integer", description="Identifiant unique de l'utilisateur")
      */
     private $id;
 
-
     /**
-     * [ORM\Column(type="string", length=180, unique=true)]
-     * [Assert\NotBlank(message="Le email est obligatoire !")]
-     * [Assert\Length(min=2, max=255, minMessage="Le email doit avoir plus de 5 caractères !")]
-     * [SWG\Property(type="string", description="Adresse email de l'utilisateur")]
-     * [var string]
+     * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message="Le email est obligatoire !")
+     * @Assert\Length(min=2, max=255, minMessage="Le email doit avoir plus de 5 caractères !")
+     * @SWG\Property(type="string", description="Adresse email de l'utilisateur")
      */
     private $username;
 
     /**
-     * [ORM\Column(type="string", length=180, unique=true)]
-     * [Assert\NotBlank(message="Le email est obligatoire !")]
-     * [Assert\Length(min=2, max=255, minMessage="Le email doit avoir plus de 5 caractères !")]
-     * [SWG\Property(type="string", description="Adresse email de l'utilisateur")]
-     * [var string]
+     * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message="Le email est obligatoire !")
+     * @Assert\Length(min=2, max=255, minMessage="Le email doit avoir plus de 5 caractères !")
+     * @SWG\Property(type="string", description="Adresse email de l'utilisateur")
      */
     private $email;
 
@@ -46,11 +43,10 @@ class User implements UserInterface
      */
     private $roles = [];
 
-     /**
+    /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message="Le mot de passe est obligatoire !")
      * @SWG\Property(type="string")
-     * @var string The hashed password
      */
     private $password;
 
@@ -63,8 +59,10 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="userClient")
      */
     private $products;
+
     private $_links;
     private $userClient;
+
     public function __construct()
     {
         $this->people = new ArrayCollection();
@@ -86,15 +84,23 @@ class User implements UserInterface
         return (string) $this->username;
     }
 
+    /**
+     * Get the user identifier (replaces getUsername() in Symfony 5.3+)
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->username;  // You can also return $this->email if needed
+    }
+
     public function setUsername(string $username): self
     {
         $this->username = $username;
-
         return $this;
     }
 
-
-     public function getUserClient(): ?Person
+    public function getUserClient(): ?Person
     {
         return $this->userClient;
     }
@@ -102,14 +108,9 @@ class User implements UserInterface
     public function setUserClient(?Person $userClient): self
     {
         $this->userClient = $userClient;
-
         return $this;
     }
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
+
     public function getEmail(): string
     {
         return (string) $this->email;
@@ -118,31 +119,23 @@ class User implements UserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
-    /**
-     * @see UserInterface
-     */
+
     public function getRoles(): array
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
-
         return array_unique($roles);
     }
 
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getPassword(): string
     {
         return (string) $this->password;
@@ -151,9 +144,9 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
         return $this;
     }
+
     public function get_Links(): ?array
     {
         return $this->_links;
@@ -162,12 +155,8 @@ class User implements UserInterface
     public function set_Links(array $links): self
     {
         $this->_links = $links;
-
         return $this;
     }
-
-
-
 
     /**
      * @see UserInterface
@@ -183,7 +172,6 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
     }
 
     /**
@@ -200,7 +188,6 @@ class User implements UserInterface
             $this->people[] = $person;
             $person->setUserClient($this);
         }
-
         return $this;
     }
 
@@ -208,12 +195,10 @@ class User implements UserInterface
     {
         if ($this->people->contains($person)) {
             $this->people->removeElement($person);
-            // set the owning side to null (unless already changed)
             if ($person->getUserClient() === $this) {
                 $person->setUserClient(null);
             }
         }
-
         return $this;
     }
 
@@ -231,19 +216,16 @@ class User implements UserInterface
             $this->products[] = $product;
             $product->setUserClient($this);
         }
-
         return $this;
     }
 
     public function removeProduct(Product $product): self
     {
         if ($this->products->removeElement($product)) {
-            // set the owning side to null (unless already changed)
             if ($product->getUserClient() === $this) {
                 $product->setUserClient(null);
             }
         }
-
         return $this;
     }
 }

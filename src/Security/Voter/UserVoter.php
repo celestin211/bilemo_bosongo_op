@@ -5,49 +5,56 @@ namespace App\Security\Voter;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\User\UserInterface;
 
-class  UserVoter extends Voter
+
+class UserVoter extends Voter
 {
-    protected function supports($attribute, $subject)
+    protected function supports(string $attribute, mixed $subject): bool
     {
-
+        // Check if the attribute is one of 'view', 'delete', 'add' and the subject is a User
         return in_array($attribute, ['view', 'delete', 'add'])
             && $subject instanceof User;
     }
 
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
+    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
 
-        // if the user is anonymous, do not grant access
+        // If the user is anonymous, do not grant access
         if (!$user instanceof User) {
             return false;
         }
 
-        // ... (check conditions and return true to grant permission) ...
+        // Logic to handle the different actions
         switch ($attribute) {
             case 'view':
                 // logic to determine if the user can VIEW
                 return $this->canView($subject, $user);
-                break;
             case 'delete':
                 return $this->canDelete($subject, $user);
-                break;
+            case 'add':
+                return $this->canAdd($subject, $user); // You can add additional logic for 'add' if needed
+            default:
+                return false; // Default case for unsupported attributes
         }
-
-        return false;
     }
 
-    private function canView(User $subject, User $user)
+    private function canView(User $subject, User $user): bool
     {
-        return $user->getId() === $subject->getId();
+        // A user can view their own data, or if they are an admin (you can add roles check)
+        return $user->getId() === $subject->getId() || in_array('ROLE_ADMIN', $user->getRoles());
     }
 
-    private function canDelete(User $subject, User $user)
+    private function canDelete(User $subject, User $user): bool
     {
-        if ($this->canView($subject, $user)) {
-            return true;
-        }
+        // A user can delete their own data, or if they are an admin (you can add roles check)
+        return $user->getId() === $subject->getId() || in_array('ROLE_ADMIN', $user->getRoles());
+    }
+
+    private function canAdd(User $subject, User $user): bool
+    {
+        // You can customize this logic based on your business requirements, for instance:
+        // Only admin users can add new users (you can add more conditions here)
+        return in_array('ROLE_ADMIN', $user->getRoles());
     }
 }

@@ -1,0 +1,6 @@
+# config/packages/api_platform.yaml
+api_platform:
+    # Enable JWT authentication
+    security:
+        authentication:
+            jwt: ~

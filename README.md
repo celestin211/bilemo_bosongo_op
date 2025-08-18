@@ -1,5 +1,4 @@
 # BOSONGO PROJET 7 OPENCLASSROOMS
-https://celestinbosongo.com/doc
 
 Besoin client
 Le premier client a enfin signé un contrat de partenariat avec BileMo ! C’est le branle-bas de combat pour répondre aux besoins de ce premier client qui va permettre de mettre en place l’ensemble des API et de les éprouver tout de suite.
@@ -69,5 +68,3 @@ login méthode = {POST}
 *
 
 7. Félicitations le projet est installé correctement, vous pouvez désormais commencer à l'utiliser à votre guise !
-
-https://celestinbosongo.com/doc
